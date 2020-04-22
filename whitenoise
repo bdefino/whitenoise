@@ -19,8 +19,7 @@ OPTIONS
 		frame rate
 		(per second; defaults to 1024)
 PATH
-	output path
-	(`-` for STDOUT)"""
+	output path"""
 
 def help(name):
 	print(__doc__ % name, file = sys.stderr)
@@ -74,14 +73,8 @@ def main(argv):
 			return 1
 
 	try:
-		if path == '-':
-			whitenoise(os.fdopen(sys.stdout.fileno(), "wb"), count,
-				fps, framelen,)
-		else:
-			with open(path, "wb") as fp:
-				whitenoise(fp, count, fps, framelen)
-	except BrokenPipeError:
-		pass
+		with open(path, "wb") as fp:
+			whitenoise(fp, count, fps, framelen)
 	except KeyboardInterrupt:
 		raise KeyboardInterrupt()
 	except Exception as e:
