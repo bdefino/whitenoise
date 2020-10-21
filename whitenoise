@@ -21,10 +21,10 @@ OPTIONS
 PATH
     output path"""
 
-def help(name):
+def __help(name):
     print(__doc__ % name, file = sys.stderr)
 
-def main(argv):
+def __main(argv):
     count = -1
     fps = 1024
     framelen = 4
@@ -32,7 +32,7 @@ def main(argv):
     path = None
 
     if not len(args) == 1:
-        help(argv[0])
+        __help(argv[0])
         return 1
     path = args[0]
 
@@ -45,7 +45,7 @@ def main(argv):
                     file = sys.stderr)
                 return 1
         elif k == "-h":
-            help(argv[0])
+            __help(argv[0])
             return 0
         elif k == "-l":
             try:
@@ -69,7 +69,7 @@ def main(argv):
                 return 1
         else:
             print("Unrecognized option.", file = sys.stderr)
-            help(argv[0])
+            __help(argv[0])
             return 1
 
     try:
@@ -105,5 +105,5 @@ def whitenoise(fp, count = -1, fps = 1024, framelen = 4):
             remaining -= n
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv))
+    sys.exit(__main(sys.argv))
 
